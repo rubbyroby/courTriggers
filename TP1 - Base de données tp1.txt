@@ -1,0 +1,81 @@
+CREATE TABLE IF NOT EXISTS `classe` (
+  `codeC` int(11) NOT NULL,
+  `nomC` varchar(30) NOT NULL,
+  `Effectif` int(11) NOT NULL,
+  PRIMARY KEY (`codeC`)
+)
+
+INSERT INTO `classe`  VALUES
+(1, 'tdi101', 0),
+(2, 'tdi102', 0)
+
+CREATE TABLE IF NOT EXISTS `etudiant` (
+  `codeE` int(11) NOT NULL,
+  `nomE` varchar(30) NOT NULL,
+  `emailE` varchar(60) NOT NULL,
+  `ageE` int(11) NOT NULL,
+  `codeC` int(11) NOT NULL,
+  PRIMARY KEY (`codeE`),
+  KEY `codeC` (`codeC`)
+)
+INSERT INTO `etudiant` (`codeE`, `nomE`, `emailE`, `ageE`, `codeC`) VALUES
+(101, 'zarah', 'zarah@gmail.com', 25, 1),
+(102, 'saidi', 'saidi@', 25, 1),
+(103, 'ilyas', 'ilyas2023@', 23, 2),
+(104, 'mourad', 'mourad@gmail', 22, 2),
+(105, 'karim', 'karim00@', 23, 2),
+(106, 'Omar', 'Omar@', 23, 2),
+(110, 'chemssi', 'chemssi', 14, 2),
+(111, 'morjani', 'chemssi', -400, 2),
+(120, 'med', 'med@gmail', 22, 1),
+(130, 'issa', 'issa@gmail', 25, 1),
+(80, 'morjani', 'chemssi', -400, 4),
+(81, 'med', 'med@gmail', 22, 4),
+(82, 'issa', 'issa@gmail', 25, 4),
+(84, 'morjani', 'chemssi', -400, 5),
+(85, 'med', 'med@gmail', 22, 5),
+(86, 'issa', 'issa@gmail', 25, 5)
+
+
+CREATE TABLE IF NOT EXISTS `module` (
+  `NModule` int(11) NOT NULL,
+  `intituleMod` varchar(60) DEFAULT NULL,
+  Coefficient int(11) DEFAULT NULL,
+  `MasseHor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`NModule`)
+)
+INSERT INTO `module`  VALUES
+(10, 'C++', 5, 90),
+(20, 'CSS', 4, 80),
+(30, 'JS', 3, 120)
+
+CREATE TABLE IF NOT EXISTS `notation` (
+  `NNotation` int(11) NOT NULL,
+  `NEtudiant` int(11) DEFAULT NULL,
+  `NModule` int(11) DEFAULT NULL,
+  `TypeNotation` varchar(15) DEFAULT NULL,
+  `Note` float DEFAULT NULL,
+  PRIMARY KEY (`NNotation`),
+foreign KEY (NEtudiant) references Etudiant(`CodeE`),
+foreign  KEY (NModule) references Module(`NModule`)
+) 
+
+	
+INSERT INTO `notation` (`NNotation`, `NEtudiant`, `NModule`, `TypeNotation`, `Note`) VALUES
+(1, 101, 10, 'CC', 9),
+(2, 101, 20, 'CC', 8),
+(3, 102, 10, 'CC', 15),
+(4, 102, 20, 'CC', 17),
+(5, 102, 30, 'CC', 2),
+(6, 104, 20, 'EFM', 14),
+(76, 106, 30, 'EFM', 14),
+(77, 106, 20, 'EFM', 6),
+(78, 106, 20, 'EFM', 6),
+(89, 102, 30, 'EFM', 14),
+(200, 120, 10, 'CC', 10),
+(201, 120, 20, 'CC', 14)
+
+----------------------------------------------------
+
+
+
